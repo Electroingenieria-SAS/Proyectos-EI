@@ -113,7 +113,11 @@ export default function Shell({ children }) {
   if (!sesion) return null;
 
   const activo = (href) => pathname.startsWith(href);
-  const conSidebar = !(pathname === "/" || pathname.startsWith("/planeacion"));
+  const conSidebar = !(
+    pathname === "/" ||
+    pathname.startsWith("/planeacion") ||
+    pathname.startsWith("/ejecucion")
+  );
 
   return (
     <div className="flex min-h-screen">
