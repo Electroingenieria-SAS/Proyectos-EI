@@ -126,7 +126,7 @@ const blankQuantity = () => fila({ descripcion: "", cantidad: "", unidad: "", ob
 const blankMaterialRequest = () => fila({ descripcion: "", unidad: "", solicitada: "", facturada: "", utilizada: "", devuelta: "", factura: "", devolucion: "", observaciones: "" });
 const blankMaterialControl = () => fila({ factura: "", bodega: "", requisicion: "", codigo: "", descripcion: "", unidad: "", cantidad: "", fechaReq: "", fechaEnt: "", entregadoPor: "", recibidoPor: "", utilizada: "", devuelta: "", fechaDev: "" });
 const blankMaintenance = () => fila({ fecha: "", tipo: "", actividades: "", resultado: "" });
-const blankTool = () => fila({ nombre: "", descripcion: "", marca: "", referencia: "", serie: "", cantidad: "1" });
+const blankTool = () => fila({ nombre: "", descripcion: "", marca: "", referencia: "", serie: "", cantidad: "" });
 const blankEconomic = () => fila({ codigo: "", descripcion: "", unidad: "", cantInicial: "", valorUnitario: "", cantPresente: "", cantAcumulada: "" });
 
 export function initialData(formatId) {
@@ -334,6 +334,7 @@ export function evaluate(formatId, data = {}) {
     const ini = dateMs(data.fechaInicio), fin = dateMs(data.fechaFin);
     if (ini && fin && fin < ini) alerts.push({ level: "error", text: "La fecha de finalización no puede ser anterior al inicio" });
     if (!(data.tiposProyecto || []).length) alerts.push({ level: "warning", text: "Seleccione al menos un tipo de proyecto" });
+    if ((data.tiposProyecto || []).includes("Otro") && !isFilled(data.otroTipo)) alerts.push({ level: "error", text: "Especifique el tipo de proyecto marcado como Otro" });
     const acts = (data.actividades || []).filter((r) => activeRow(r, ["descripcion", "unidad", "cantidad", "ejecutada", "adicional", "aprobacionAdicional", "observaciones"]));
     const actResults = acts.map(activityRow);
     actResults.forEach((r, i) => { if (r.estado === "REVISAR") alerts.push({ level: "error", text: `Actividad ${i + 1}: ${r.alerta}` }); });
@@ -411,6 +412,7 @@ export function evaluate(formatId, data = {}) {
       if (!isFilled(r.cantAcumulada)) alerts.push({ level: "error", text: `Ítem ${i + 1}: falta cantidad acumulada` });
       if (num(r.cantAcumulada) < num(r.cantPresente)) alerts.push({ level: "error", text: `Ítem ${i + 1}: acumulada menor que presente` });
     });
+    if (!rows.length) alerts.push({ level: "error", text: "Agregue al menos un ítem al detalle económico" });
     const totals = liquidationTotals(data);
     const disponible = num(data.valorInicial) + num(data.valorAdicional);
     if (disponible > 0 && totals.acumulado > disponible + 0.5) alerts.push({ level: "error", text: "La liquidación acumulada excede el valor contractual disponible" });
