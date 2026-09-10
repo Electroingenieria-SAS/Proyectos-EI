@@ -60,6 +60,31 @@ export default function Landing() {
             </svg>
           </div>
         </a>
+
+        <a href="/ejecucion"
+          className="group animate-slide-up bg-white rounded-2xl border border-[#e5e7eb] p-7
+            hover:border-azul hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+          style={{ animationDelay: "0.19s" }}>
+          <div className="flex items-center justify-between mb-6">
+            <div className="h-12 w-12 rounded-xl bg-azul/10 text-azul grid place-items-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16v16H4zM8 12l2.5 2.5L16 9" />
+              </svg>
+            </div>
+            <span className="text-[11px] font-semibold text-azul bg-azul-soft px-2.5 py-1 rounded-full">Nuevo</span>
+          </div>
+          <h2 className="text-lg font-bold text-[#1a1a1a]">Ejecución</h2>
+          <p className="text-sm text-gray-500 mt-1.5 leading-relaxed">
+            Espacio independiente para desarrollar el módulo de ejecución.
+          </p>
+          <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-azul">
+            Entrar
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+              className="group-hover:translate-x-1 transition-transform duration-200">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </div>
+        </a>
       </div>
     </div>
   );
