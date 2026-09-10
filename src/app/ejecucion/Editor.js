@@ -48,7 +48,7 @@ function TextArea({ value, onChange, placeholder, rows = 3 }) {
 
 function Section({ number, title, description, children, defaultOpen = true }) {
   return (
-    <details open={defaultOpen} className="group bg-white border border-[#e5e7eb] rounded-xl overflow-hidden animate-slide-up print:border-0 print:rounded-none print:overflow-visible">
+    <details defaultOpen={defaultOpen} className="group bg-white border border-[#e5e7eb] rounded-xl overflow-hidden animate-slide-up print:border-0 print:rounded-none print:overflow-visible">
       <summary className="list-none cursor-pointer px-5 py-4 flex items-center gap-3 select-none print:cursor-default">
         <div className="h-8 w-8 rounded-lg bg-azul-soft text-azul grid place-items-center text-xs font-extrabold shrink-0">{number}</div>
         <div className="min-w-0 flex-1">
